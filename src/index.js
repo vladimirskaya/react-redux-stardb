@@ -1,12 +1,23 @@
 // https://swapi.dev
 
 class SwapiService {
-  async getResource() {
-    const res = await fetch(url);
+
+  _apiBase = 'https://swapi.dev/api';
+
+  async getResource(url) {
+    const res = await fetch(`${this._apiBase}${url}`);
   if (!res.ok) {
-    throw new Error(`Couldn't get ${url}, status ${res.status}`)
+    throw new Error(`Couldn't get ${this._apiBase}${url}, status ${res.status}`)
   }
   return await res.json();
-
   }
+
+  getAllPeople() {
+    return this.getResource(`/people/`);
+  }
+
+  getPerson(id) {
+    return this.getResource(`/people/${id}`);
+  }
+
 }
