@@ -1,3 +1,12 @@
+- Библиотики для работы с запросами, которые оборачивают АПИ в более высокоуровневые компоненты:
+    Axios 
+    Superagent
+    Got
+    Request
+    Reqwest
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
