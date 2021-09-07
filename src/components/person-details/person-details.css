@@ -5,7 +5,8 @@
     padding: 1rem;
   }
   
-  .person-details .person-image {
+  .person-image {
+    /* padding: 10px; */
     width: 30%;
     height: 30%;
     border-radius: 10px;
