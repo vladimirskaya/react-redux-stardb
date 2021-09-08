@@ -1,0 +1,25 @@
+.error-indicator {
+    margin: 0 auto;
+    font-size: 1.25rem;
+    color:coral;
+}
+
+.img-container{
+    margin: 0 auto;   
+}
+
+.error-img {
+    position: relative;
+    left: calc(50% - 50px);
+    width: 100px;
+    height: 80px;
+}
+
+.error-indicator span{
+    display: block;
+    text-align: center;
+}
+
+.boom {
+    font-size: 2em;
+}
