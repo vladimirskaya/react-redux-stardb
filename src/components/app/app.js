@@ -18,7 +18,7 @@ export default class App extends Component {
     const prevState = this.state.showRandomPlanet;
     this.setState({
       showRandomPlanet: !prevState
-    })
+    });
   }
 
   onPersonSelected = (id) => {
@@ -27,8 +27,7 @@ export default class App extends Component {
     });
   }
 
-
-  render() {
+  render(){
 
     const planet = this.state.showRandomPlanet ? <RandomPlanet/> : null;
     return (
@@ -41,10 +40,9 @@ export default class App extends Component {
               Toogle Random Planet
         </button>
 
-  
         <div className="row mb2">
           <div className="col-md-6">
-            <ItemList onItemSelected={this.onPersonSelected} />
+            <ItemList onItemSelected={this.onPersonSelected}/>
           </div>
           <div className="col-md-6">
             <PersonDetails personId={this.state.selectedPerson}/>
