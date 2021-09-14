@@ -6,12 +6,15 @@ import ItemList from '../item-list';
 import PersonDetails from '../person-details';
 
 import './app.css';
+import ErrorButton from '../error-button';
+import ErrorIndicator from '../error-indicator';
+import PeoplePage from '../people-page';
 
 export default class App extends Component {
 
   state = {
     showRandomPlanet: true,
-    selectedPerson: null
+    hasError: false   // была ли ошибка или нет в методах жизн.цикла
   }
 
   toggleRandomPlanet = () => {
@@ -21,14 +24,18 @@ export default class App extends Component {
     });
   }
 
-  onPersonSelected = (id) => {
-    this.setState({
-      selectedPerson: id
-    });
+  componentDidCatch() {
+    console.log('componentDidCatch');
+    this.setState({ hasError: true }); // если обнаружена ошибка, то: 
+                                        // 1 - устанавливаем Стейт в тру
+                                        // 2 - в рендере прописываем условия по ошибкам -> 42
   }
 
   render(){
 
+    if (this.state.hasError) {
+      return <ErrorIndicator/>
+    }
     const planet = this.state.showRandomPlanet ? <RandomPlanet/> : null;
     return (
       <div className="star-db-app">
@@ -39,15 +46,10 @@ export default class App extends Component {
             onClick={this.toggleRandomPlanet}>
               Toogle Random Planet
         </button>
-
-        <div className="row mb2">
-          <div className="col-md-6">
-            <ItemList onItemSelected={this.onPersonSelected}/>
-          </div>
-          <div className="col-md-6">
-            <PersonDetails personId={this.state.selectedPerson}/>
-          </div>
-        </div>
+        <ErrorButton/> 
+        <PeoplePage/> 
+        <PeoplePage/> 
+        <PeoplePage/> 
       </div>
     );
   }
