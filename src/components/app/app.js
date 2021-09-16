@@ -9,8 +9,11 @@ import './app.css';
 import ErrorButton from '../error-button';
 import ErrorIndicator from '../error-indicator';
 import PeoplePage from '../people-page';
+import SwapiService from '../../services/swapi-service';
 
 export default class App extends Component {
+
+  swapi = new SwapiService();
 
   state = {
     showRandomPlanet: true,
@@ -46,10 +49,33 @@ export default class App extends Component {
             onClick={this.toggleRandomPlanet}>
               Toogle Random Planet
         </button>
+
         <ErrorButton/> 
+
         <PeoplePage/> 
-        <PeoplePage/> 
-        <PeoplePage/> 
+
+        <div className="row mb2">
+          <div className="col-md-6">
+            <ItemList onItemSelected={this.onPersonSelected}
+                      getData={this.swapi.getAllPlanets} // эта функция испол-ся для того, чтоб передавать данные
+                      renderItem={(item) => `${item.name}, ${item.diameter} km` } />
+                  {/* эта функция будет заниматься отрисовкой списка */}
+          </div>
+          <div className="col-md-6">
+            <PersonDetails personId={this.state.selectedPerson}/>
+          </div>
+        </div>
+
+        <div className="row mb2">
+          <div className="col-md-6">
+            <ItemList onItemSelected={this.onPersonSelected}
+                      getData={this.swapi.getAllStartships}
+                      renderItem={(item) => `${item.name}, model: ${item.model}` } />
+          </div>
+          <div className="col-md-6">
+            <PersonDetails personId={this.state.selectedPerson}/>
+          </div>
+        </div>
       </div>
     );
   }

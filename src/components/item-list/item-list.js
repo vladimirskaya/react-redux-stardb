@@ -8,52 +8,47 @@ import './item-list';
 
 export default class ItemList extends Component {
 
-  swapiService = new SwapiService();
-
   state = {
-    peopleList: null
+    itemList: null
   }
 
   componentDidMount() {
-    //здесь нужно получить данные из АПИ. Для этого нужен СвапиСервис -> строка 11
-    this.swapiService
-      .getAllPeople()
-      .then((peopleList) => {
+    const { getData } = this.props; // getData возвращает промис 
+    getData()
+      .then((itemList) => {
         this.setState({
-          peopleList
+          itemList
         });
       });
       // console.log('this.state;',this.state);
   }
 
   renderItems(arr) {
-    // console.log('this.props', this.props);
+    // onItemSelected - как называется в родителе, propsOnItemSelected - как обозвать здесь
     const { onItemSelected: propsOnItemSelected } = this.props;
-    // console.log('propsOnItemSelected', propsOnItemSelected);
-    return arr.map( ({name, id }) => {
-      // console.log(name,id, typeof this.props);
+    return arr.map( (item) => {
+      const { id } = item;
+      const label = this.props.renderItem(item)
+
       return ( 
         <li className = "list-group-item"
-        key={id}
-        onClick={() => {
-          // console.log(`у персонажа № ${id}: ${propsOnItemSelected}`);
-          propsOnItemSelected (id)}}> 
-          {name} 
+            key={id}
+            onClick={() => {propsOnItemSelected (id)}}> 
+          {label} 
         </li>
       )
     });
   }
 
   render() {
-    // console.log('this.state;',this.state);
     //достаем ПиплЛист из стэйта
-    const { peopleList } = this.state;
+    const { itemList } = this.state;
     // и если Пипллиста нету, т.е. он null, то мы отоюражаем спиннер
-    if (!peopleList) {
+    if (!itemList) {
       return <Spinner/>
     }
     // console.log('peopleList:',peopleList);
-    const items = this.renderItems(peopleList);
+    const items = this.renderItems(itemList);
     // console.log('items:' ,items);
     return ( 
       <ul className = "item-list list-group">
