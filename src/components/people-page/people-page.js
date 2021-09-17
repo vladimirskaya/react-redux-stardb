@@ -38,14 +38,17 @@ export default class PeoplePage extends Component {
                       renderItem={({name, gender, birthYear}) => (
                         `${name} (${gender}, ${birthYear}) `
                         ) } />
-        )
+        ),
+              personDetails = (
+                <PersonDetails personId={this.state.selectedPerson}/>
+              );
         return(
         <div className="row mb2">
           <div className="col-md-6">
             {itemList}
           </div>
           <div className="col-md-6">
-            <PersonDetails personId={this.state.selectedPerson}/>
+            {personDetails}
           </div>
         </div>
         )
