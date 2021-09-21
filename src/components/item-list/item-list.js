@@ -24,11 +24,14 @@ export default class ItemList extends Component {
   }
 
   renderItems(arr) {
+    console.log('arr=', arr);
+    console.log('this.props.childrenwewerwr=',this.props.children);
     // onItemSelected - как называется в родителе, propsOnItemSelected - как обозвать здесь
     const { onItemSelected: propsOnItemSelected } = this.props;
     return arr.map( (item) => {
       const { id } = item;
-      const label = this.props.renderItem(item)
+      console.log('this.props.children=',this.props.children);
+      const label = this.props.children(item);
 
       return ( 
         <li className = "list-group-item"

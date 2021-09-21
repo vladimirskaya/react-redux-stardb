@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import SwapiService from '../../services/swapi-service';
+import ErrorBoundry from '../error-boundry';
 import ErrorIndicator from '../error-indicator';
 import ItemList from '../item-list';
-import PersonDetails from '../person-details';
+import ItemDetails from '../item-details';
 
 import './people-page.css';
+
+
 
 
 const Row = ({ left, right }) => {
@@ -24,8 +27,7 @@ export default class PeoplePage extends Component {
   swapiService = new SwapiService();
 
     state = {
-        selectedPerson: null,
-        hasError: false
+        selectedPerson: null
     }
 
     onPersonSelected = (id) => {
@@ -33,11 +35,6 @@ export default class PeoplePage extends Component {
           selectedPerson: id
         });
       }
-
-    componentDidCatch(error, info){
-        debugger;
-        this.setState({ hasError: true });
-    }
 
     render() {
 
@@ -47,17 +44,20 @@ export default class PeoplePage extends Component {
 
         const itemList = (
                     <ItemList onItemSelected={this.onPersonSelected}
-                      getData={this.swapiService.getAllPeople}
-                      renderItem={({name, gender, birthYear}) => (
-                        `${name} (${gender}, ${birthYear}) `
-                      ) } />
-        ),
-              personDetails = (
-                    <PersonDetails personId={this.state.selectedPerson}/>
-              );
+                      getData={this.swapiService.getAllPeople}>
+                        {(i) => (
+                          `${i.name} (${i.birthYear}) `
+                        )}
+                    </ItemList> 
+        );
+        const personDetails = (
+          <ErrorBoundry>
+            <ItemDetails personId={this.state.selectedPerson}/>
+          </ErrorBoundry>          
+        );
         
-              return(
-                <Row left={itemList} right={personDetails}/>
-              );
+        return(
+          <Row left={itemList} right={personDetails}/>
+        );
     }
 }
