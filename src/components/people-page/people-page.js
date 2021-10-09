@@ -16,13 +16,6 @@ export default class PeoplePage extends Component {
     hasError: false
   };
 
-  componentDidCatch(error, info) {
-
-    this.setState({
-      hasError: true
-    });
-  }
-
   onPersonSelected = (selectedPerson) => {
     this.setState({ selectedPerson });
   };
