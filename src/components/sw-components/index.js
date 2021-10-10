@@ -7,17 +7,14 @@ import {
 import {
     PlanetList,
     PersonList,
-    StarshipsList
+    StarshipList
 } from './item-lists.js'
 
 export {
     PersonDetails,
     PlanetDetails,
-    StarshipDetails
-} 
-
-export {
+    StarshipDetails,
     PlanetList,
     PersonList,
-    StarshipsList
+    StarshipList
 } 
