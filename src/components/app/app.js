@@ -61,11 +61,11 @@ export default class App extends Component {
               <StarshipDetails itemId={9}/>
 
 
-              {/* <PersonList />
+              <PersonList />
 
               <PlanetList />
 
-              <StarshipList/>  */}
+              <StarshipList/> 
 
 
           </div>
