@@ -1,8 +1,6 @@
-import {
-    PersonDetails,
-    PlanetDetails,
-    StarshipDetails
-} from './details.js'
+import StarshipDetails from './starship-details.js'
+import PersonDetails from './person-details'
+import PlanetDetails from './planet-details.js'
 
 import {
     PlanetList,
