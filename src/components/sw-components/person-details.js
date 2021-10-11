@@ -5,14 +5,11 @@ import { withSwapiService } from '../hoc-helper';
 import ErrorBoundry from '../error-boundry';
 
 
-const PersonDetails= ({ itemId, swapiService }) => {
-    const { getPerson, getPersonImage } = swapiService;
+const PersonDetails= (props) => {
+    
     return (
       <ErrorBoundry>
-        <ItemDetails
-        itemId={itemId}
-        getData={getPerson}
-        getImageUrl={getPersonImage}>
+        <ItemDetails {...props} >
         
         <Record field="gender" label="Gender" />
         <Record field="eyeColor" label="Eye Color" />
@@ -22,4 +19,11 @@ const PersonDetails= ({ itemId, swapiService }) => {
     )       
 };
 
-export default withSwapiService(PersonDetails);
+const mapMethodsToProps = (swapiService) => {
+    return {
+        getData: swapiService.getPerson,
+        getImageUrl: swapiService.getPersonImage
+    }
+}
+
+export default withSwapiService(PersonDetails, mapMethodsToProps);
