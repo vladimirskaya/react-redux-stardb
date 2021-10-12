@@ -1,5 +1,3 @@
-import React from 'react';
-
 const compose = (...funcs) => (component) => {
     return funcs.reduceRight( (prevResult, f) => f(prevResult), component)
 }
