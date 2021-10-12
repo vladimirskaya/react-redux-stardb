@@ -19,7 +19,7 @@ const withData = (View ) => {
       }
      
       render() {
-        console.log((this.state));
+        
         const { data } = this.state;
   
         if (!data) {
