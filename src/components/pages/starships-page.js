@@ -6,12 +6,7 @@ const StarshipsPage = ({history}) => {
 
     return (
         <StarshipList 
-            onItemSelected={(itemId) => {
-                const newPath = `/starships/${itemId}`;
-                history.push(newPath)
-
-
-            }}/>
+            onItemSelected={(itemId) => history.push(itemId)}/>
     );
 }
 export default withRouter(StarshipsPage);
